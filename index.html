@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ankit Madhukar — Senior AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #080c12;
+    --bg2: #0d1320;
+    --bg3: #111927;
+    --teal: #00d4b8;
+    --teal-dim: #00a38d;
+    --gold: #f5c842;
+    --text: #e8edf5;
+    --muted: #7a8ba3;
+    --border: rgba(0,212,184,0.15);
+    --card: rgba(13,19,32,0.85);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    width: 12px; height: 12px; background: var(--teal); border-radius: 50%;
+    transform: translate(-50%,-50%);
+    transition: transform 0.15s ease, opacity 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+    width: 40px; height: 40px; border: 1px solid rgba(0,212,184,0.5);
+    border-radius: 50%; transform: translate(-50%,-50%);
+    transition: transform 0.4s cubic-bezier(.25,.8,.25,1), width 0.3s, height 0.3s;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,212,184,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,184,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 2px; }
+
+  /* NAV REMOVED */
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--teal); letter-spacing: 0.25em;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before { content: '> '; opacity: 0.5; }
+  .hero-name {
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 800; line-height: 0.92;
+    letter-spacing: -0.03em;
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-name em {
+    font-style: normal; color: transparent;
+    -webkit-text-stroke: 1.5px var(--teal);
+  }
+  .hero-role {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; font-size: clamp(1.2rem, 2.5vw, 2rem);
+    color: var(--muted); margin-top: 1.5rem;
+    opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-keywords {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .kw {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(0,212,184,0.04);
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    transition: all 0.2s;
+  }
+  .kw:hover { border-color: var(--teal); color: var(--teal); background: rgba(0,212,184,0.08); }
+  .hero-cta {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    opacity: 0; animation: fadeUp 0.9s 1s forwards;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    background: var(--teal); color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.25s; border: 1px solid var(--teal);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { background: transparent; color: var(--teal); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--border); color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  .hero-accent {
+    position: absolute; right: -10%; bottom: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,184,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-line {
+    position: absolute; left: 0; bottom: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    opacity: 0.3;
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+    opacity: 0; animation: fadeUp 1s 1.4s forwards;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+    animation: scrollLine 2s 2s infinite;
+  }
+
+  /* ABOUT */
+  #about {
+    padding: 8rem 4rem;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--teal); letter-spacing: 0.25em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .section-tag::before { content: '[ '; } .section-tag::after { content: ' ]'; }
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  h2 .accent { color: var(--teal); }
+  .about-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem; line-height: 1.8; color: var(--muted);
+  }
+  .about-text strong { color: var(--text); font-style: italic; font-weight: 400; }
+  .about-badges {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
+  }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border); color: var(--muted);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .badge:hover { border-color: var(--teal); color: var(--teal); }
+  .about-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-card {
+    width: 100%; background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+  .card-metric {
+    display: flex; flex-direction: column; padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-metric:last-child { border-bottom: none; }
+  .metric-value { font-size: 1.8rem; font-weight: 800; color: var(--teal); }
+  .metric-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+
+  /* EXPERIENCE */
+  #experience {
+    padding: 8rem 4rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .exp-header { margin-bottom: 4rem; }
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .exp-item:first-of-type { border-top: 1px solid var(--border); }
+  .exp-item::before {
+    content: ''; position: absolute; left: 200px; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px; height: 8px; background: var(--teal); border-radius: 50%;
+    box-shadow: 0 0 12px var(--teal);
+    transition: all 0.3s;
+  }
+  .exp-item:hover::before { transform: translate(-50%,-50%) scale(1.5); }
+  .exp-meta { padding-right: 2rem; border-right: 1px solid var(--border); }
+  .exp-company { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .exp-period { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.1em; margin-top: 0.4rem; }
+  .exp-location { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-top: 0.3rem; }
+  .exp-content { padding-left: 2rem; }
+  .exp-role { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .exp-bullets li {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+    padding-left: 1.2rem; position: relative;
+  }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 0.7rem; top: 0.15rem; }
+  .exp-bullets strong { color: var(--text); }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; padding: 0.25rem 0.6rem; background: rgba(0,212,184,0.07); border: 1px solid rgba(0,212,184,0.2); color: var(--teal); border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* SKILLS */
+  #skills {
+    padding: 8rem 4rem;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .skills-inner { max-width: 1200px; margin: 0 auto; }
+  .projects-inner { max-width: 1200px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .skill-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+  .skill-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .skill-card:hover::after { transform: scaleX(1); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-cat { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; padding: 0.3rem 0.7rem;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    color: var(--muted); border-radius: 2px; letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .skill-pill:hover { background: rgba(0,212,184,0.08); border-color: rgba(0,212,184,0.3); color: var(--teal); }
+
+  /* PROJECTS MERGED */
+  #projects {
+    padding: 8rem 4rem;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+  .vibe-inner { max-width: 1200px; margin: 0 auto; }
+  #projects .vibe-grid { max-width: 1200px; margin: 0 auto; }
+  .vibe-intro {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; font-size: 1.05rem; color: var(--muted);
+    margin-top: 0.8rem; margin-bottom: 3rem;
+    max-width: 600px;
+  }
+  .vibe-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .vibe-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.8rem; position: relative; overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .vibe-card:hover { border-color: rgba(245,200,66,0.4); transform: translateY(-4px); }
+  .vibe-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .vibe-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .vibe-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin-bottom: 1rem; }
+  .vibe-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .vibe-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+    padding: 0.2rem 0.5rem; background: rgba(245,200,66,0.07);
+    border: 1px solid rgba(245,200,66,0.2); color: var(--gold); border-radius: 2px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .vibe-status {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .live { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+  .building { background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: pulse 2s infinite; }
+  .concept { background: var(--muted); }
+  .vibe-card { cursor: pointer; }
+  .vibe-card .vibe-open-hint {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 1.2rem; display: flex; align-items: center; gap: 0.4rem;
+    border-top: 1px solid var(--border); padding-top: 0.8rem;
+    transition: color 0.2s;
+  }
+  .vibe-card:hover .vibe-open-hint { color: var(--gold); }
+  .vibe-open-hint::before { content: '+'; font-size: 0.9rem; color: var(--gold); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(4,7,12,0.88);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    width: 100%; max-width: 720px;
+    max-height: 88vh; overflow-y: auto;
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(.25,.8,.25,1);
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal::before {
+    content: ''; position: sticky; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    display: block;
+  }
+  .modal-header {
+    padding: 2rem 2rem 1.2rem;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-header-left { display: flex; align-items: center; gap: 1rem; }
+  .modal-emoji { font-size: 2.4rem; }
+  .modal-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+  .modal-subtitle { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.9rem; color: var(--muted); margin-top: 0.2rem; }
+  .modal-close {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    width: 36px; height: 36px; border-radius: 2px; font-size: 1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.2s;
+  }
+  .modal-close:hover { border-color: var(--teal); color: var(--teal); }
+  .modal-body { padding: 2rem; }
+  .modal-section { margin-bottom: 2rem; }
+  .modal-section:last-child { margin-bottom: 0; }
+  .modal-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; color: var(--teal); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .modal-section p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1rem; color: var(--muted); line-height: 1.75;
+  }
+  .modal-section p strong { color: var(--text); font-style: italic; font-weight: 400; }
+  .modal-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .modal-bullets li {
+    font-size: 0.87rem; color: var(--muted); line-height: 1.6;
+    padding-left: 1.3rem; position: relative;
+  }
+  .modal-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 0.7rem; top: 0.2rem; }
+  .modal-bullets strong { color: var(--text); }
+  .modal-meta-row {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .modal-meta-box {
+    background: rgba(0,212,184,0.04); border: 1px solid var(--border);
+    padding: 1rem; text-align: center;
+  }
+  .modal-meta-value { font-size: 1.3rem; font-weight: 800; color: var(--teal); }
+  .modal-meta-label { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+  .modal-tech-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .modal-tech-pill {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    padding: 0.35rem 0.8rem; background: rgba(245,200,66,0.07);
+    border: 1px solid rgba(245,200,66,0.2); color: var(--gold);
+    border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  }
+  .modal-status-row { display: flex; align-items: center; gap: 0.6rem; margin-left: auto; }
+  .modal-status-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* CONTACT */
+  #contact {
+    padding: 8rem 4rem;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem;
+    border: 1px solid var(--border); background: var(--card);
+    text-decoration: none; color: var(--text);
+    transition: all 0.25s;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+  .contact-link:hover { border-color: var(--teal); color: var(--teal); transform: translateX(4px); }
+  .contact-link-icon { font-size: 1rem; width: 20px; text-align: center; }
+  .contact-tagline {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; font-size: 1.4rem; line-height: 1.6;
+    color: var(--muted);
+  }
+  .contact-tagline strong { color: var(--text); font-style: normal; font-weight: 400; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
+  @keyframes scrollLine {
+    0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* REVEAL ON SCROLL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    #hero { padding: 0 2rem; }
+    #about, #experience, #projects, #contact { padding: 5rem 2rem; grid-template-columns: 1fr; gap: 3rem; }
+    #skills, #vibe-coded { padding: 5rem 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .vibe-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-item::before { display: none; }
+    .exp-meta { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 1rem; }
+    .exp-content { padding-left: 0; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Senior AI Product Manager</div>
+  <h1 class="hero-name">Ankit<br/><em>Madhukar</em></h1>
+  <p class="hero-role">Building AI systems that save crores, serve millions,<br/>and ship on time.</p>
+  <div class="hero-keywords">
+    <span class="kw">GenAI Products</span>
+    <span class="kw">RAG Architecture</span>
+    <span class="kw">Fintech · NBFC</span>
+    <span class="kw">0-to-1 Builder</span>
+    <span class="kw">LLM Applications</span>
+    <span class="kw">IIM Bangalore MBA</span>
+    <span class="kw">AI Governance</span>
+    <span class="kw">Voice AI</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#experience" class="btn-primary">View My Work →</a>
+    <a href="/cdn-cgi/l/email-protection#41202f2a28352c202529342a2033737201262c20282d6f222e2c" class="btn-outline">Get In Touch</a>
+  </div>
+  <div class="hero-accent"></div>
+  <div class="hero-line"></div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-tag">About Me</div>
+    <h2>I build AI that<br/><span class="accent">actually ships.</span></h2>
+    <p class="about-text">
+      From <strong>0-to-1 KYC platforms</strong> to LLM-powered underwriting engines, I sit at the intersection of GenAI and fintech — translating messy real-world problems into scalable, compliant, cost-saving AI products. <strong>Hands-on with RAG, LangChain, and AWS Bedrock</strong>, but always PM-first: discovery, data, decisions, delivery.
+    </p>
+    <div class="about-badges">
+      <span class="badge">IIM Bangalore MBA</span>
+      <span class="badge">LLM Architect</span>
+      <span class="badge">RAG Systems</span>
+      <span class="badge">RBI Compliance</span>
+      <span class="badge">Agile / Scrum</span>
+      <span class="badge">AWS Bedrock</span>
+      <span class="badge">Azure OpenAI</span>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <div class="card-metric">
+        <span class="metric-value">INR 2.5Cr</span>
+        <span class="metric-label">Saved by in-house KYC platform</span>
+      </div>
+      <div class="card-metric">
+        <span class="metric-value">90%</span>
+        <span class="metric-label">Infrastructure cost cut — Call QA platform</span>
+      </div>
+      <div class="card-metric">
+        <span class="metric-value">125K</span>
+        <span class="metric-label">Monthly calls analyzed autonomously</span>
+      </div>
+      <div class="card-metric">
+        <span class="metric-value">40%</span>
+        <span class="metric-label">Straight-through loan processing rate</span>
+      </div>
+      <div class="card-metric">
+        <span class="metric-value">13+</span>
+        <span class="metric-label">AI use cases validated with defined ROI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="exp-header reveal">
+    <div class="section-tag">Work Experience</div>
+    <h2>Where I've <span class="accent">shipped</span> things.</h2>
+  </div>
+  <div class="exp-grid">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Credit Saison India</div>
+        <div class="exp-period">Apr 2024 — Present</div>
+        <div class="exp-location">Bangalore, India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Senior Product Manager — AI Labs</div>
+        <ul class="exp-bullets">
+          <li>Built <strong>proprietary KYC platform from 0-to-1</strong> in 8 months — 8-vendor build-vs-buy analysis, 15-person eng team, full compliance. Saves <strong>INR 2.5 Cr/year</strong>; scales to 150K+ monthly applications with 100% VKYC audit compliance.</li>
+          <li>Launched <strong>Credit Manager Copilot</strong> — AI-augmented underwriting assistant integrated into LMS, surfacing risk signals inline. Phase 1: <strong>10% TAT reduction</strong>; Phase 2 targeting straight-through decisioning.</li>
+          <li>Shipped <strong>AI call quality automation</strong> for 125K+ monthly calls — replaced AWS Comprehend with optimized in-house LLM pipeline (15+ discovery interviews), cutting infra costs <strong>by 90%</strong> and freeing 30% of agent capacity.</li>
+          <li>Led <strong>AI underwriting engine</strong> (OCR + Azure OpenAI) for 20+ document types — <strong>20% higher accuracy</strong>, 40% straight-through processing, INR 1.8 Cr/year savings.</li>
+          <li>Championed <strong>Voice AI PoC</strong> for collections — designed eval framework, ran vendor & in-house trials, built business case projecting <strong>INR 40L savings by FY26</strong>.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">Azure OpenAI</span><span class="tag">KYC</span><span class="tag">Voice AI</span><span class="tag">RBI Compliance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Khatabook</div>
+        <div class="exp-period">Mar 2022 — Mar 2023</div>
+        <div class="exp-location">Bangalore, India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Senior Business Analyst</div>
+        <ul class="exp-bullets">
+          <li>Built <strong>predictive infrastructure utilization models</strong> right-sizing data warehouse allocation — delivered <strong>22% cost efficiency</strong> improvement within 30 days.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Predictive Modelling</span><span class="tag">SQL</span><span class="tag">Data Warehouse</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Apple India</div>
+        <div class="exp-period">Apr 2023 — May 2023</div>
+        <div class="exp-location">Hyderabad, India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Product Analytics Intern (MBA)</div>
+        <ul class="exp-bullets">
+          <li>Led product discovery via <strong>10+ stakeholder interviews</strong> for retail ops iOS dashboard across 12 stores; built predictive discrepancy model improving detection accuracy by <strong>25%</strong>.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Product Analytics</span><span class="tag">iOS</span><span class="tag">Retail Ops</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-company">Valuelabs</div>
+        <div class="exp-period">May 2019 — Mar 2022</div>
+        <div class="exp-location">Bangalore, India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Consultant — BI Product & Digital Transformation</div>
+        <ul class="exp-bullets">
+          <li>Led <strong>0-to-1 Omega BI platform</strong> across 5 business verticals — 60% reduction in manual reporting, <strong>$100K in new APAC revenue</strong>.</li>
+          <li>Delivered $250K BI tool migration refactoring 200+ legacy reports — compressed reporting cycles by <strong>94%</strong> (7 days → 10 hours).</li>
+          <li>Built internal BI Stack Recommender — accelerated PoC delivery by <strong>50%</strong>, reduced onboarding from 4 weeks to 10 days.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">BI Automation</span><span class="tag">NLP Analytics</span><span class="tag">GTM</span><span class="tag">Tableau</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-inner">
+    <div class="reveal">
+      <div class="section-tag">Technical Stack</div>
+      <h2>Tools of the <span class="accent">trade.</span></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧠</div>
+        <div class="skill-cat">AI & Machine Learning</div>
+        <div class="skill-list">
+          <span class="skill-pill">LLM Applications</span>
+          <span class="skill-pill">RAG Architecture</span>
+          <span class="skill-pill">Prompt Engineering</span>
+          <span class="skill-pill">AI Evals</span>
+          <span class="skill-pill">LangChain</span>
+          <span class="skill-pill">Hugging Face</span>
+          <span class="skill-pill">Multi-Agent</span>
+          <span class="skill-pill">Fine-tuning</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-cat">Cloud & Infrastructure</div>
+        <div class="skill-list">
+          <span class="skill-pill">AWS Bedrock</span>
+          <span class="skill-pill">Azure OpenAI</span>
+          <span class="skill-pill">AWS Comprehend</span>
+          <span class="skill-pill">S3 / Lambda</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">API Design</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-cat">Product Management</div>
+        <div class="skill-list">
+          <span class="skill-pill">0-to-1 Development</span>
+          <span class="skill-pill">AI Product Strategy</span>
+          <span class="skill-pill">Roadmapping</span>
+          <span class="skill-pill">Go-To-Market</span>
+          <span class="skill-pill">A/B Testing</span>
+          <span class="skill-pill">Agile / Scrum</span>
+          <span class="skill-pill">Stakeholder Mgmt</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">💻</div>
+        <div class="skill-cat">Engineering</div>
+        <div class="skill-list">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">OCR Pipelines</span>
+          <span class="skill-pill">Vector DBs</span>
+          <span class="skill-pill">Speech-to-Text</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🏦</div>
+        <div class="skill-cat">Domain Expertise</div>
+        <div class="skill-list">
+          <span class="skill-pill">Fintech (NBFC)</span>
+          <span class="skill-pill">KYC / VKYC</span>
+          <span class="skill-pill">RBI Compliance</span>
+          <span class="skill-pill">Lending & Credit</span>
+          <span class="skill-pill">Underwriting</span>
+          <span class="skill-pill">AI Governance</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-cat">Tools & Analytics</div>
+        <div class="skill-list">
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Power BI</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">JIRA</span>
+          <span class="skill-pill">Mixpanel</span>
+          <span class="skill-pill">Qlik Sense</span>
+          <span class="skill-pill">GitHub Copilot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-inner reveal">
+    <div class="section-tag">Projects &amp; Side Quests</div>
+    <h2>Things I've <span class="accent">built.</span></h2>
+    <p class="vibe-intro">From fintech AI at work to experiments that scratch my own itch — all clickable, all real.</p>
+  </div>
+
+  <div class="vibe-grid" style="margin-top:3rem;">
+
+    <div class="vibe-card reveal" onclick="openModal('pmcopilot')">
+      <span class="vibe-status building"></span>
+      <span class="vibe-emoji">📋</span>
+      <div class="vibe-name">AI PM Copilot</div>
+      <p class="vibe-desc">Converts vague feature requests into structured PRDs. The LLM asks clarifying questions before generating — no hallucinated metrics, no fake user stories.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">Claude API</span><span class="vibe-tag">LangChain</span><span class="vibe-tag">Streamlit</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+    <div class="vibe-card reveal" onclick="openModal('fieldrisk')">
+      <span class="vibe-status live"></span>
+      <span class="vibe-emoji">🎯</span>
+      <div class="vibe-name">Field Risk Assistant</div>
+      <p class="vibe-desc">LLM-based dynamic PD generator that tailors investigation queries to borrower risk profiles and auto-scores responses — cutting manual credit officer prep time.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">LLM</span><span class="vibe-tag">Credit Risk</span><span class="vibe-tag">Python</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+    <div class="vibe-card reveal" onclick="openModal('dociq')">
+      <span class="vibe-status live"></span>
+      <span class="vibe-emoji">🧾</span>
+      <div class="vibe-name">DocIQ</div>
+      <p class="vibe-desc">Upload any unstructured financial doc — bank statement, ITR, payslip — and get structured JSON out. Powers straight-through underwriting at Credit Saison.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">OCR</span><span class="vibe-tag">Azure OpenAI</span><span class="vibe-tag">Python</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+    <div class="vibe-card reveal" onclick="openModal('desitranscribe')">
+      <span class="vibe-status live"></span>
+      <span class="vibe-emoji">🎙️</span>
+      <div class="vibe-name">Desi Transcribe</div>
+      <p class="vibe-desc">Speech-to-text fine-tuned for Indian-accented English. Built because AWS Transcribe kept mangling borrower names and city names on 125K+ monthly calls.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">Whisper</span><span class="vibe-tag">FastAPI</span><span class="vibe-tag">HuggingFace</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+    <div class="vibe-card reveal" onclick="openModal('retentionradar')">
+      <span class="vibe-status building"></span>
+      <span class="vibe-emoji">📊</span>
+      <div class="vibe-name">Retention Radar</div>
+      <p class="vibe-desc">Multi-signal churn prediction for NBFC lending books — flags at-risk borrowers before they miss a payment using behavioral and transactional signals.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">XGBoost</span><span class="vibe-tag">SHAP</span><span class="vibe-tag">AWS</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+    <div class="vibe-card reveal" onclick="openModal('saisonsensei')">
+      <span class="vibe-status live"></span>
+      <span class="vibe-emoji">🤖</span>
+      <div class="vibe-name">SaisonSensei</div>
+      <p class="vibe-desc">RAG-powered internal AI assistant for NBFC operations — answers policy questions, surfaces RBI compliance docs, and onboards new hires in minutes.</p>
+      <div class="vibe-tech">
+        <span class="vibe-tag">RAG</span><span class="vibe-tag">AWS Bedrock</span><span class="vibe-tag">LangChain</span>
+      </div>
+      <div class="vibe-open-hint">Click to expand</div>
+    </div>
+
+  </div>
+
+  <div style="display:flex;align-items:center;gap:0.8rem;margin-top:2.5rem;" class="reveal">
+    <span style="width:8px;height:8px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;flex-shrink:0;"></span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;">LIVE</span>
+    <span style="width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold);flex-shrink:0;margin-left:1.5rem;animation:pulse 2s infinite;"></span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;">BUILDING</span>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modal-box">
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-tag">Get In Touch</div>
+    <h2>Let's build<br/><span class="accent">something real.</span></h2>
+    <p class="contact-tagline">
+      Open to <strong>senior AI PM roles</strong>, advisory conversations, and interesting problems at the intersection of <strong>LLMs and regulated industries</strong>.
+    </p>
+  </div>
+  <div class="reveal">
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#2647484d4f524b47424e534d4754141566414b474f4a0845494b" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        <span class="__cf_email__" data-cfemail="92f3fcf9fbe6fff3f6fae7f9f3e0a0a1d2f5fff3fbfebcf1fdff">[email&#160;protected]</span>
+      </a>
+      <a href="https://linkedin.com/in/ankitmadhukar" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">in</span>
+        linkedin.com/in/ankitmadhukar
+      </a>
+      <a href="https://github.com/ankitmadhukar" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">⌥</span>
+        github.com/ankitmadhukar
+      </a>
+      <a href="tel:+919884208308" class="contact-link">
+        <span class="contact-link-icon">☏</span>
+        +91 98842 08308
+      </a>
+    </div>
+    <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="/cdn-cgi/l/email-protection#d7b6b9bcbea3bab6b3bfa2bcb6a5e5e497b0bab6bebbf9b4b8ba" class="btn-primary">Say Hello →</a>
+      <a href="https://linkedin.com/in/ankitmadhukar" target="_blank" rel="noopener" class="btn-outline">LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Ankit Madhukar · Bangalore, India</span>
+  <span>Built with ☕ + LLMs · <a href="/cdn-cgi/l/email-protection#e3828d888a978e82878b96888291d1d0a3848e828a8fcd808c8e"><span class="__cf_email__" data-cfemail="3e5f5055574a535f5a564b555f4c0c0d7e59535f5752105d5153">[email&#160;protected]</span></a></span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const modals = {
+    pmcopilot: {
+      emoji: '📋', title: 'AI PM Copilot', status: 'building',
+      subtitle: 'Vague request → structured PRD, every time',
+      tagline: 'The PM tool built by a PM, for PMs who are tired of blank-page syndrome.',
+      problem: 'Feature requests arrive as Slack messages, voice notes, and half-baked emails. Turning them into structured PRDs takes hours and still gets called "too vague" in review. Existing AI tools just hallucinate metrics and skip the hard thinking.',
+      solution: 'An LLM-powered copilot that interrogates a vague request before writing anything. It asks clarifying questions (who is the user? what is the current workaround? what does success look like numerically?) and only generates the PRD once it has enough signal.',
+      highlights: [
+        '<strong>Socratic pre-generation</strong> — the model asks 3–5 targeted clarifying questions before drafting, avoiding hallucinated assumptions',
+        '<strong>Structured output</strong>: Problem Statement, User Personas, User Stories, Acceptance Criteria, Success Metrics, Edge Cases, Out of Scope',
+        '<strong>Inline PM coaching</strong> — flags weak sections ("this metric is not measurable") and suggests rewrites',
+        'Designed around real Credit Saison PRD reviews — every template field maps to something challenged in stakeholder sign-offs',
+        'Streamlit interface for fast iteration; API layer for future JIRA / Notion integration'
+      ],
+      metrics: [{ v: 'Building', l: 'Status' }, { v: '~2hrs', l: 'PRD Time Saved' }, { v: 'Claude API', l: 'LLM Engine' }],
+      stack: ['Claude API', 'LangChain', 'Python', 'Streamlit', 'Pydantic'],
+      link: 'https://github.com/ankitmadhukar'
+    },
+    fieldrisk: {
+      emoji: '🎯', title: 'Field Risk Assistant', status: 'live',
+      subtitle: 'Dynamic PD generation tailored to borrower risk profiles',
+      tagline: 'Better questions before the visit means better credit decisions after it.',
+      problem: 'Credit officers conducting Personal Discussions (PDs) before loan disbursement were using the same generic question templates for every borrower — regardless of their risk profile, income segment, or application red flags. This led to missed signals and inconsistent underwriting quality.',
+      solution: 'An LLM-based tool that reads the borrower\'s application data, bureau score, and risk flags, then generates a tailored set of PD questions — ordered by priority. After the visit, the officer records responses and the model auto-scores them against expected risk indicators.',
+      highlights: [
+        '<strong>Risk-aware question generation</strong> — questions adapt to debt-to-income ratio, employment type, bureau history, and declared vs. observed income gaps',
+        '<strong>Priority ordering</strong> — highest-risk signals surface first so officers spend time on what matters',
+        '<strong>Auto-scoring engine</strong> — model-based evaluation of officer-recorded responses reduces manual interpretation bias',
+        '<strong>Reduced prep time</strong> for credit officers by eliminating generic template hunting before field visits',
+        'Built as a <strong>lightweight internal tool</strong> with a simple form UI — no ML infra required by the end user'
+      ],
+      metrics: [{ v: 'Live', l: 'Status' }, { v: 'LLM Evals', l: 'Scoring Method' }, { v: 'Fintech', l: 'Domain' }],
+      stack: ['Python', 'LLM (Azure OpenAI)', 'Pydantic', 'FastAPI', 'React'],
+      link: 'https://github.com/ankitmadhukar'
+    },
+    dociq: {
+      emoji: '🧾', title: 'DocIQ', status: 'live',
+      subtitle: 'Unstructured financial docs → clean structured JSON',
+      tagline: "The document intelligence layer powering Credit Saison's straight-through underwriting.",
+      problem: 'Underwriters were manually extracting data from 20+ document types per application — bank statements, ITRs, payslips, Form 16, GST returns, balance sheets. Each doc had 10+ layout variants from different banks. Manual extraction was slow, error-prone, and could not scale.',
+      solution: 'A multi-stage document intelligence pipeline: OCR extracts raw text → layout analysis identifies document type → Azure OpenAI performs structured extraction with JSON schema enforcement → a validation layer cross-checks extracted values for internal consistency.',
+      highlights: [
+        '<strong>Handles 20+ document types</strong> across 100+ layout variants from Indian banks and financial institutions',
+        '<strong>Schema-enforced extraction</strong> using function calling — no free-text LLM output that breaks downstream systems',
+        '<strong>Cross-document validation</strong> — flags discrepancies between stated income (payslip) and observed income (bank statement)',
+        '<strong>40% straight-through processing</strong> rate — applications meeting quality thresholds routed directly to decisioning without human review',
+        '<strong>INR 1.8 Cr/year</strong> in underwriter cost savings; 20% higher extraction accuracy vs. prior vendor'
+      ],
+      metrics: [{ v: '20+', l: 'Doc Types' }, { v: '40%', l: 'STP Rate' }, { v: '₹1.8Cr', l: 'Annual Savings' }],
+      stack: ['Azure OpenAI', 'Python', 'OCR (Tesseract + Azure DI)', 'Pydantic', 'FastAPI', 'AWS S3'],
+      link: 'https://github.com/ankitmadhukar'
+    },
+    desitranscribe: {
+      emoji: '🎙️', title: 'Desi Transcribe', status: 'live',
+      subtitle: 'Speech-to-text that actually understands India',
+      tagline: 'Because "Rajkumar" should not come out as "Raj Kumar" and "Mumbai" should not be "Mum Bye."',
+      problem: "Credit Saison's call quality platform was transcribing 125K+ monthly customer calls using AWS Transcribe. It struggled with Indian-accented English, regional name/city pronunciation, and NBFC-domain vocabulary (NPA, PDC, NACH, EMI skips). Error rates were degrading downstream LLM analysis quality.",
+      solution: 'Fine-tuned Whisper on a curated dataset of Indian-accented call recordings and augmented with a domain vocabulary layer. Deployed as a FastAPI microservice that drops in as a replacement for the existing transcription vendor — same API contract, better output.',
+      highlights: [
+        '<strong>Custom dataset</strong> — curated 15K+ annotated utterances from real NBFC call recordings, covering Hindi-English code-switching',
+        '<strong>Domain vocabulary injection</strong> for fintech terms: NACH, EMI, PDC, CIBIL, NPA, moratorium',
+        '<strong>22% WER improvement</strong> over AWS Transcribe baseline on internal test set',
+        'Deployed as a <strong>drop-in FastAPI microservice</strong> — zero changes to downstream pipeline',
+        'Cost: <strong>~90% cheaper</strong> per minute than commercial API alternatives at the same quality tier'
+      ],
+      metrics: [{ v: '22%', l: 'WER Improvement' }, { v: '90%', l: 'Cost vs Commercial' }, { v: '125K+', l: 'Monthly Calls' }],
+      stack: ['Whisper (fine-tuned)', 'Python', 'FastAPI', 'HuggingFace', 'PyTorch', 'Docker'],
+      link: 'https://github.com/ankitmadhukar'
+    },
+    retentionradar: {
+      emoji: '📊', title: 'Retention Radar', status: 'building',
+      subtitle: 'Predict churn before borrowers go quiet',
+      tagline: 'The best time to intervene with an at-risk borrower is before they miss a payment.',
+      problem: 'Customer retention in NBFC lending is reactive — collections teams engage only after a payment is missed. Early churn signals exist in behavioral and transactional data but were not being systematically surfaced.',
+      solution: 'A multi-signal churn prediction model combining behavioral signals (app opens, statement downloads, customer service contacts), transactional patterns (EMI timing, partial payments), and external signals. Output is a daily at-risk score per borrower with recommended intervention type.',
+      highlights: [
+        '<strong>Feature engineering</strong> across 40+ behavioral, transactional, and contact-pattern signals',
+        '<strong>Gradient boosting model</strong> (XGBoost) with SHAP-based explainability so relationship managers understand why a borrower is flagged',
+        '<strong>Intervention recommendation engine</strong> — maps risk tier to action: proactive call, EMI restructuring offer, loyalty nudge',
+        '<strong>Daily scoring pipeline</strong> on AWS — refreshes risk scores each morning before collections starts calling',
+        'Targeting <strong>15% improvement</strong> in early-stage delinquency intervention rate'
+      ],
+      metrics: [{ v: '40+', l: 'Feature Signals' }, { v: 'Daily', l: 'Score Refresh' }, { v: '15%', l: 'Intervention Target' }],
+      stack: ['Python', 'XGBoost', 'SHAP', 'SQL', 'AWS Glue', 'SageMaker', 'Tableau'],
+      link: 'https://github.com/ankitmadhukar'
+    },
+    saisonsensei: {
+      emoji: '🤖', title: 'SaisonSensei', status: 'live',
+      subtitle: 'Internal AI assistant for NBFC operations',
+      tagline: "Every employee's smartest colleague — available 24/7, never in a meeting.",
+      problem: 'New hires at Credit Saison spent weeks navigating scattered policy docs, compliance SOPs, and process wikis across SharePoint and email. Senior employees wasted hours answering the same questions repeatedly.',
+      solution: 'Built a RAG-powered AI assistant grounded on all internal documentation — KYC SOPs, RBI circulars, lending policies, HR handbooks. Employees ask in plain English; SaisonSensei retrieves, reasons, and responds with cited sources.',
+      highlights: [
+        '<strong>Document ingestion pipeline</strong> — automated chunking, embedding, and indexing of 500+ internal documents via AWS Bedrock',
+        '<strong>Hybrid retrieval</strong> — dense + sparse search to handle both semantic queries and keyword lookups for specific RBI circulars',
+        '<strong>Source citations</strong> on every answer, reducing misplaced trust in hallucinated outputs',
+        '<strong>Role-aware context</strong> — credit managers, ops, and HR see filtered knowledge relevant to their function',
+        'Targeted <strong>60% reduction</strong> in internal policy Q&A tickets within 3 months of deployment'
+      ],
+      metrics: [{ v: '500+', l: 'Docs Ingested' }, { v: '60%', l: 'Ticket Reduction' }, { v: 'AWS Bedrock', l: 'LLM Backend' }],
+      stack: ['AWS Bedrock', 'LangChain', 'RAG', 'OpenSearch', 'Python', 'React', 'S3'],
+      link: 'https://github.com/ankitmadhukar'
+    }
+  };
+
+  const statusMeta = {
+    live: { color: '#22c55e', glow: '#22c55e', label: 'Live' },
+    building: { color: '#f5c842', glow: '#f5c842', label: 'Building' },
+    concept: { color: '#7a8ba3', glow: 'transparent', label: 'Concept' }
+  };
+
+  function openModal(id) {
+    const d = modals[id];
+    const st = statusMeta[d.status];
+    document.getElementById('modal-content').innerHTML = `
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="modal-emoji">${d.emoji}</span>
+          <div>
+            <div class="modal-title">${d.title}</div>
+            <div class="modal-subtitle">${d.subtitle}</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta-row">
+          ${d.metrics.map(m => `<div class="modal-meta-box"><div class="modal-meta-value">${m.v}</div><div class="modal-meta-label">${m.l}</div></div>`).join('')}
+        </div>
+        <div class="modal-section">
+          <div class="modal-section-title">The Tagline</div>
+          <p style="font-size:1.05rem;color:var(--text);font-style:italic;">${d.tagline}</p>
+        </div>
+        <div class="modal-section">
+          <div class="modal-section-title">The Problem</div>
+          <p>${d.problem}</p>
+        </div>
+        <div class="modal-section">
+          <div class="modal-section-title">The Solution</div>
+          <p>${d.solution}</p>
+        </div>
+        <div class="modal-section">
+          <div class="modal-section-title">Key Highlights</div>
+          <ul class="modal-bullets">${d.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+        </div>
+        <div class="modal-section">
+          <div class="modal-section-title">Tech Stack</div>
+          <div class="modal-tech-grid">${d.stack.map(s => `<span class="modal-tech-pill">${s}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="${d.link}" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+        <div class="modal-status-row">
+          <span class="modal-status-dot" style="background:${st.color};box-shadow:0 0 8px ${st.glow};${d.status==='building'?'animation:pulse 2s infinite':''}"></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">${st.label}</span>
+        </div>
+      </div>
+    `;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .vibe-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.width = '60px'; ring.style.height = '60px'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.width = '40px'; ring.style.height = '40px'; });
+  });
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), 80); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.skills-grid, .projects-grid, .vibe-grid, .exp-grid').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i * 0.08) + 's'; });
+  });
+
+
+</script>
+</body>
+</html>
